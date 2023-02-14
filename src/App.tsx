@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { TarhelyApi } from './api/tarhely.api';
+import { TarhelyDTO } from './api/dto/tarhely.dto';
 
 function App() {
+  const [tarhely, setTarhely] = useState<TarhelyDTO[]>([])
+
+  useEffect(() => {
+    async function fetchAll() {
+      const resp = await TarhelyApi.getAll();
+
+      setTarhely(resp);
+
+    }
+
+    fetchAll();
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>
+        
+      {
+       tarhely.map(tarhely => {
+        return <li>{tarhely.nev}</li>
+      
+       })
+       
+       }
+
+       
+       </ul>
     </div>
   );
 }
