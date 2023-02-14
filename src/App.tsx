@@ -3,36 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import { TarhelyApi } from './api/tarhely.api';
 import { TarhelyDTO } from './api/dto/tarhely.dto';
+import Tablazat from './components/Tablazat';
+import Felvetel from './components/Felvetel';
 
 function App() {
-  const [tarhely, setTarhely] = useState<TarhelyDTO[]>([])
-
-  useEffect(() => {
-    async function fetchAll() {
-      const resp = await TarhelyApi.getAll();
-
-      setTarhely(resp);
-
-    }
-
-    fetchAll();
-  }, [])
-
   return (
     <div className="App">
-      <ul>
-        
-      {
-       tarhely.map(tarhely => {
-        return <li>{tarhely.nev}</li>
-      
-       })
-       
-       }
-
-       
-       </ul>
-    </div>
+     <Tablazat/>
+     <Felvetel/>
+     </div>
   );
 }
 
